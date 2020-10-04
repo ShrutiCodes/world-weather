@@ -4,7 +4,7 @@ const request = require('request');
 
 const app = express();
 
-const apiKey = 'c866570d44c9bad2011bd4ee9639ba89';
+const apiKey = '3cbf3bd40d02523115b3bfe6bdeb1ad3';
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -18,9 +18,7 @@ app.get('/', function(req, res){
 
 app.post('/', function(req, res){
     let city = req.body.city;
-    let url = 'http://api.openweathermap.org/data/2.5/weather?q=${input}&units=metric&appid=${apiKey}';
-    
-    console.log(req.body.city);
+    let url = 'http://api.openweathermap.org/data/2.5/weather?q='+ city +'&units=metric&appid=3cbf3bd40d02523115b3bfe6bdeb1ad3';
 
     request(url, function(err, response, body){
         if(err){
@@ -33,7 +31,7 @@ app.post('/', function(req, res){
                 res.render('index', {weather: null, error: 'Could not get weather, please try again'});
             }
             else{
-                let weatherText = 'Its ${weather.main.temp} degrees with ${weather.weather[0].main} in ${weather.name}';
+                let weatherText = 'Its '+weather.main.temp+' degrees with '+weather.weather[0].main+' in '+weather.name;
                 res.render('index', {weather: weatherText, error: null});
                 console.log("body: ", body);
             }
